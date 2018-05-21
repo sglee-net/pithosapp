@@ -20,7 +20,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {org.chronotics.pithos.Application.class})
 public class SqlStatementBuilderTest {
-	
+
 //	// Strings that is defined as below 
 //	// could be better than this kind of enum
 //	public static enum TABLE {
