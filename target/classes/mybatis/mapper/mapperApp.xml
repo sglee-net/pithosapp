@@ -3,17 +3,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.chronotics.db.mybatis.app.mapper.MapperUser">
+<mapper namespace="org.chronotics.db.mybatis.app.mapper.IMapperApp">
 <!-- 	
 	Please note the difference between using #{} and ${}. 
 	Hashtags sign means a prepared statement variables, while dollar sign means a simple string replace.
 	Simply, pair or sigle value
  -->  
- <select id="select" parameterType="map" resultType="map">
+ <select id="selectOne" parameterType="map" resultType="map">
     SELECT * 
     FROM ${table}
     WHERE
-    ${statement} <!-- name = #{name} -->
+    name = #{name}
   </select>
   
    <select id="selectList" parameterType="map" resultType="map">
