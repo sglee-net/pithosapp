@@ -38,7 +38,13 @@ public class ServiceApp {
 //		}
 //		System.out.println(result.get(0).get("number"));
 
-		float number = dao.getNumber(_name);
+		float number = 0.0f;
+		try {
+			number = dao.getNumber(_name);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return number;
 	}
 }
