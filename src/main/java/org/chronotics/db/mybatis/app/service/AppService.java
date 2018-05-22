@@ -1,21 +1,20 @@
 package org.chronotics.db.mybatis.app.service;
 
-
 import javax.annotation.Resource;
 
-import org.chronotics.db.mybatis.app.dao.DaoApp;
+import org.chronotics.db.mybatis.app.dao.AppDao;
 import org.springframework.stereotype.Service;
 
-@Service("serviceApp")
-public class ServiceApp {
+@Service("appService")
+public class AppService {
 	
-	@Resource(name = "daoApp")
-	DaoApp dao;
+	@Resource(name = "appDao")
+	AppDao dao;
 	
-//	@Resource(name = "mapperApp")
-//	private IMapperApp mapper;
+//	@Resource(name = "appMapper")
+//	private IAppMapper mapper;
 //	
-//	public void setMapperUser(IMapperApp _mapper) {
+//	public void setMapperUser(IAppMapper _mapper) {
 //		mapper = _mapper;
 //	}
 	

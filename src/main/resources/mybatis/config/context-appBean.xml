@@ -15,14 +15,9 @@
         http://www.springframework.org/schema/task/spring-task.xsd
 		http://www.springframework.org/schema/util 
         http://www.springframework.org/schema/util/spring-util.xsd">
- 	
-   	<bean id="sqlSessionFactoryBeanMySql" class="org.mybatis.spring.SqlSessionFactoryBean">
-	    <property name="dataSource" ref="dataSourceMySql" />
-	    <property name="mapperLocations" value="classpath:mybatis/mapper/**/mapper*.xml" />
- 	</bean>
- 	
-   	<bean id="sqlSessionFactoryBeanOracle" class="org.mybatis.spring.SqlSessionFactoryBean">
-	    <property name="dataSource" ref="dataSourceOracle" />
-	    <property name="mapperLocations" value="classpath:mybatis/mapper/**/mapper*.xml" />
- 	</bean>	
- </beans>
+	
+  	<bean id="appDao" class="org.chronotics.db.mybatis.app.dao.AppDao">
+		<property name="sqlSession" ref="sqlSessionSimpleMySql" />
+	</bean>
+
+</beans>

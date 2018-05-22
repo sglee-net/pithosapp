@@ -3,8 +3,9 @@ package org.chronotics.db.mybatis.app.mapper;
 import java.util.List;
 import java.util.Map;
 
-public interface IMapperApp {
-	public static String className = "org.chronotics.db.mybatis.app.mapper.IMapperApp.";
+public interface IAppMapper {
+
+	public static String className = "org.chronotics.db.mybatis.app.mapper.IAppMapper.";
 
 	public Map<String,Object> selectOne(Map<Object,Object> parameter);
 	
@@ -15,5 +16,4 @@ public interface IMapperApp {
 	public int update(Map<Object,Object> parameter);
 	
 	public int delete(Map<Object,Object> parameter);
-	
 }

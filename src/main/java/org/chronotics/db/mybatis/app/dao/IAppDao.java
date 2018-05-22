@@ -1,5 +1,5 @@
 package org.chronotics.db.mybatis.app.dao;
 
-public interface IDaoApp {
+public interface IAppDao {
 	float getNumber(String name) throws Exception;
 }

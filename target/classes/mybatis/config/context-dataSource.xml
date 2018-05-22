@@ -29,7 +29,7 @@
 	    <property name="maxWait" value="#{propMySql['jdbc.maxWait']}" />
 	</bean>
 	
-<!-- 	<util:properties id="propOracle" location="classpath:mybatis/properties/datasource-oracle.properties" />
+ 	<util:properties id="propOracle" location="classpath:mybatis/properties/datasource-oracle.properties" />
 	<bean id="dataSourceOracle" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
 	    <property name="driverClassName" value="#{propOracle['jdbc.driver']}" />
 	    <property name="url" value="#{propOracle['jdbc.url']}" />
@@ -40,9 +40,9 @@
 	    <property name="maxIdle" value="#{propOracle['jdbc.maxIdle']}" />
 	    <property name="minIdle" value="#{propOracle['jdbc.minIdle']}" />
 	    <property name="maxWait" value="#{propOracle['jdbc.maxWait']}" />
-	</bean> -->
+	</bean>
 
-<!-- 	<bean id="dataSource-log4j" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+<!--  	<bean id="dataSource-log4j" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
 		<constructor-arg ref="dataSource" />
 		<property name="logFormatter">
 			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">

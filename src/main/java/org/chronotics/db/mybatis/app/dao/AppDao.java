@@ -6,11 +6,11 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
-import org.chronotics.db.mybatis.app.mapper.IMapperApp;
+import org.chronotics.db.mybatis.app.mapper.IAppMapper;
 import org.springframework.stereotype.Repository;
 
-@Repository("daoApp")
-public class DaoApp implements IDaoApp {
+@Repository("appDao")
+public class AppDao implements IAppDao {
 
 	@Resource(name = "sqlSessionSimpleMySql")
 	private SqlSession sqlSession;
@@ -46,7 +46,7 @@ public class DaoApp implements IDaoApp {
 		parameter.put("name", name);
 		
 		Map<String, Object> result =
-				sqlSession.selectOne(IMapperApp.className+"selectOne",parameter);
+				sqlSession.selectOne(IAppMapper.className+"selectOne",parameter);
 
 		if(result.size() ==0) {
 			return 999;
@@ -56,5 +56,4 @@ public class DaoApp implements IDaoApp {
 		}
 //		return 0;
 	}
-
 }
