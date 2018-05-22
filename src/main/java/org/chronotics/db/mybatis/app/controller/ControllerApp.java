@@ -1,7 +1,5 @@
 package org.chronotics.db.mybatis.app.controller;
 
-import javax.annotation.Resource;
-
 import org.chronotics.db.mybatis.app.service.ServiceApp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

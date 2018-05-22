@@ -6,8 +6,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
-import org.chronotics.db.mybatis.MapperMySql;
-import org.chronotics.db.mybatis.SqlStatement;
 import org.chronotics.db.mybatis.app.mapper.IMapperApp;
 import org.springframework.stereotype.Repository;
 
@@ -17,8 +15,8 @@ public class DaoApp implements IDaoApp {
 	@Resource(name = "sqlSessionSimpleMySql")
 	private SqlSession sqlSession;
 	
-	@Resource(name = "mapperSimpleMySql")
-	private MapperMySql mapper;
+//	@Resource(name = "mapperSimpleMySql")
+//	private MapperMySql mapper;
 	
 	public void setSqlSession(SqlSession _sqlSession) {
 		sqlSession = _sqlSession;
@@ -30,9 +28,9 @@ public class DaoApp implements IDaoApp {
 			return 888;
 		}
 		
-		if(mapper == null) {
-			return 889;
-		}
+//		if(mapper == null) {
+//			return 889;
+//		}
 		
 //		SqlStatement sqlSatement = 
 //				new SqlStatement.Builder()

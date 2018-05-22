@@ -20,14 +20,14 @@
 		<property name="sqlSession" ref="sqlSessionSimpleMySql" />
 	</bean>
 		
- 	<bean id="mapperMap" class="org.chronotics.db.mybatis.MapperMap">
+<!--  	<bean id="mapperMap" class="org.chronotics.db.mybatis.MapperMap">
 		<property name="mapperMap">
 			<map>
 				<entry key="mapperSimpleMySql" value-ref="mapperSimpleMySql" />
 				<entry key="mapperSimpleOracle" value-ref="mapperSimpleOracle" />
 			</map>
 		</property>
-	</bean>
+	</bean> -->
 	
   	<bean id="mapperSimpleMySql" class="org.chronotics.db.mybatis.MapperMySql">
 		<property name="sqlSession" ref="sqlSessionSimpleMySql" />
@@ -37,12 +37,12 @@
 		<property name="sqlSession" ref="sqlSessionBatchMySql" />
 	</bean>
 	
-  	<bean id="mapperSimpleOracle" class="org.chronotics.db.mybatis.MapperOracle">
+<!--   	<bean id="mapperSimpleOracle" class="org.chronotics.db.mybatis.MapperOracle">
 		<property name="sqlSession" ref="sqlSessionSimpleOracle" />
 	</bean>
 	
    	<bean id="mapperBatchOracle" class="org.chronotics.db.mybatis.MapperOracle">
 		<property name="sqlSession" ref="sqlSessionBatchOracle" />
-	</bean>
+	</bean> -->
 
 </beans>

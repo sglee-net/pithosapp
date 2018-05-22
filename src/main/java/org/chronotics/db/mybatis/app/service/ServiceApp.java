@@ -1,17 +1,10 @@
 package org.chronotics.db.mybatis.app.service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.chronotics.db.mybatis.app.dao.DaoApp;
-import org.chronotics.db.mybatis.app.mapper.IMapperApp;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service("serviceApp")
 public class ServiceApp {
