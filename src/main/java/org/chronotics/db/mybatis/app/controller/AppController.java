@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 
 import org.chronotics.db.mybatis.MapperMySql;
 import org.chronotics.db.mybatis.app.service.AppService;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,20 +70,16 @@ public class AppController {
     
     @RequestMapping(
     		value = "/record", 
-    		method = RequestMethod.GET, 
-    		consumes = {"application/json"})
+    		method = RequestMethod.GET)
     @ResponseBody
     public String readRecord(
-    		@RequestBody String _json) {
-    	List<Float> numberList= service.selectRecord(_json);
-    	String strResult="";
-    	for(int i=0; i<numberList.size(); i++) {
-    		if(i!=0 || i!=numberList.size()-1) {
-    			strResult += ", ";
-    		}
-    		strResult += Float.toString(numberList.get(i));
+    		@RequestParam("tableName") String _tableName) {
+    	JSONObject jsonObject = service.selectAllRecords(_tableName);
+    	if(jsonObject != null) {
+    		return jsonObject.toString();
+    	} else {
+    		return "no records";
     	}
-        return new String("select return size()" + Integer.toString(numberList.size()) + ", " + strResult);
     }
     
     @RequestMapping(

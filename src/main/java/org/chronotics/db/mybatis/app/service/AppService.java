@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.chronotics.db.mybatis.app.dao.AppDao;
+import org.chronotics.db.mybatis.app.dao.IAppDao;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 @Service("appService")
@@ -25,9 +27,8 @@ public class AppService {
 		return numberList;
 	}
 	
-	public List<Float> selectRecord(String _json) {
-		
-		return null;
+	public JSONObject selectAllRecords(String _tableName) {
+		return dao.selectAllRecords(_tableName);
 	}
 	
 	public int insertRecord(String _json) {
