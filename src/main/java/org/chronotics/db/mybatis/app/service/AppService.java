@@ -1,5 +1,7 @@
 package org.chronotics.db.mybatis.app.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.chronotics.db.mybatis.app.dao.AppDao;
@@ -11,32 +13,42 @@ public class AppService {
 	@Resource(name = "appDao")
 	AppDao dao;
 	
-//	@Resource(name = "appMapper")
-//	private IAppMapper mapper;
-//	
-//	public void setMapperUser(IAppMapper _mapper) {
-//		mapper = _mapper;
-//	}
-	
-	public float selectNumberByName(String _name) {
-//		Map<Object,Object> parameterObject = new HashMap<Object,Object>();
-//		parameterObject.put("name",_name);		
-//		List<Map<String,Object>> result = mapper.selectList(parameterObject);
-//		
-//		for(Map<String,Object> map : result) {
-//			for(Map.Entry<String, Object> entry : map.entrySet()) {
-//				System.out.println(entry.getKey() + ", " + entry.getValue());
-//			}
-//		}
-//		System.out.println(result.get(0).get("number"));
+	public List<Float> selectNumberByName(String _name) {
 
-		float number = 0.0f;
+		List<Float> numberList = null;
 		try {
-			number = dao.getNumber(_name);
+			numberList = dao.getNumbers(_name);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return number;
+		return numberList;
 	}
+	
+	public List<Float> selectRecord(String _json) {
+		
+		return null;
+	}
+	
+	public int insertRecord(String _json) {
+		return dao.insertRecord(_json);
+	}
+	
+	public int insertRecords(String _json) {
+		return dao.insertRecords(_json);
+	}
+	
+	public int updateRecord(String _json) {
+		
+		return 0;
+	}
+	
+	public int deleteRecord() {
+//			String _tablename) {//, 
+//			String _leftOperand,
+//			String _operator,
+//			String _rightOperand) {
+		return dao.deleteRecord(); //_tablename);//, _leftOperand, _operator, _rightOperand);
+	}
+	
 }
