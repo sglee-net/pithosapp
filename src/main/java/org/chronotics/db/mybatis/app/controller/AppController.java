@@ -31,17 +31,6 @@ public class AppController {
 	@Resource(name = "mapperSimpleMySql")
 	private MapperMySql mapper;
 	
-//	class Record {
-//		String str1;
-//		String str2;
-//		float number;
-//		// BINARY
-//		// BLOB
-//		// CLOB
-////		Date date;
-//		long time;
-////		Date timestamp;
-//	}
 	@RequestMapping(
 			value = "/", 
 			method = RequestMethod.GET)

@@ -21,7 +21,6 @@ public class AppService {
 		try {
 			numberList = dao.getNumbers(_name);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return numberList;
@@ -40,8 +39,7 @@ public class AppService {
 	}
 	
 	public int updateRecord(String _json) {
-		
-		return 0;
+		return dao.updateRecord(_json);
 	}
 	
 	public int deleteRecord() {

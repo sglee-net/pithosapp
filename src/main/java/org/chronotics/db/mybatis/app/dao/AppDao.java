@@ -10,7 +10,8 @@ import javax.annotation.Resource;
 import org.apache.ibatis.session.SqlSession;
 import org.chronotics.db.mybatis.MapperMySql;
 import org.chronotics.db.mybatis.SqlStatement;
-import org.json.JSONArray;
+import org.chronotics.db.mybatis.SqlStatement.KEYWORD;
+import org.chronotics.db.mybatis.SqlStatement.OPERATOR;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -107,7 +108,7 @@ public class AppDao implements IAppDao {
 			String statement=
 			"DROP TABLE IF EXISTS " + TABLENAME;
 			Map<Object,Object> sqlStatement = new LinkedHashMap<Object,Object>();
-			sqlStatement.put(SqlStatement.STATEMENT,statement);
+			sqlStatement.put(KEYWORD.STATEMENT,statement);
 			mapper.doStatement(sqlStatement);
 		}
 		
@@ -127,7 +128,7 @@ public class AppDao implements IAppDao {
 			"	PRIMARY KEY (c0)" + 
 			");";
 			Map<Object,Object> sqlStatement = new LinkedHashMap<Object,Object>();
-			sqlStatement.put(SqlStatement.STATEMENT,statement);
+			sqlStatement.put(KEYWORD.STATEMENT,statement);
 			mapper.doStatement(sqlStatement);
 		}
 	}
@@ -137,7 +138,7 @@ public class AppDao implements IAppDao {
 			String statement=
 			"DROP TABLE IF EXISTS " + TABLENAME;
 			Map<Object,Object> sqlStatement = new LinkedHashMap<Object,Object>();
-			sqlStatement.put(SqlStatement.STATEMENT,statement);
+			sqlStatement.put(KEYWORD.STATEMENT,statement);
 			mapper.doStatement(sqlStatement);
 		}
 	}
@@ -192,7 +193,15 @@ public class AppDao implements IAppDao {
 			return -1;
 		}
 		
-		return mapper.insertMultipleItems(sqlStatement);
+		int count = -1;
+		try {
+			count = mapper.insertMultipleItems(sqlStatement);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return count;
 	}
 	
 	@Override
@@ -209,8 +218,13 @@ public class AppDao implements IAppDao {
 				.from("user")
 				.build();
 
-		List<Map<String, Object> > result = 
-				mapper.selectList(sqlStatement);
+		List<Map<String, Object>> result = null;
+		try {
+			result = mapper.selectList(sqlStatement);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 //		Map<Object, Object> parameter = new LinkedHashMap<Object, Object>();
 //		parameter.put("table", "user");
@@ -235,7 +249,7 @@ public class AppDao implements IAppDao {
 		if(!isInitialized()) {
 			initialize();
 		}
-
+		
 		SqlStatement sqlStatement = null;
 		sqlStatement = new SqlStatement.Builder()
 				.select("*")
@@ -247,7 +261,14 @@ public class AppDao implements IAppDao {
 			return null;
 		}
 
-		List<Map<String, Object> > resultSet = mapper.selectList(sqlStatement);
+		List<Map<String, Object>> resultSet = null;
+		try {
+			resultSet = mapper.selectList(sqlStatement);
+			logger.info("{} items are selected",resultSet.size());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		JSONObject jsonObject = null;
 		if(resultSet != null) {
@@ -260,6 +281,18 @@ public class AppDao implements IAppDao {
 		if(!isInitialized()) {
 			initialize();
 		}
+		
+		String tableName = null;
+		try {
+			tableName = SqlStatement.getTableName(_json);
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if(tableName == null) {
+			return -1;
+		}
+		
 		List<Object> colNames = null;
 		List<Object> colValues = null;
 		
@@ -273,10 +306,13 @@ public class AppDao implements IAppDao {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		if(colNames == null || colValues == null) {
+			return -1;
+		}
 		
 		SqlStatement sqlStatement = null;
 		sqlStatement = new SqlStatement.Builder()
-				.insert(TABLENAME)
+				.insert(tableName)
 				.colValues(colNames, colValues)
 				.build();
 
@@ -285,15 +321,34 @@ public class AppDao implements IAppDao {
 			return -1;
 		}
 		
-		int result = mapper.insert(sqlStatement);
+		int resultCount = 0;
+		try {
+			resultCount = mapper.insert(sqlStatement);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		return result;
+		logger.info("{} items are inserted",resultCount);
+		return resultCount;
 	}
 	
 	public int insertRecords(String _json) {
 		if(!isInitialized()) {
 			initialize();
 		}
+		
+		String tableName = null;
+		try {
+			tableName = SqlStatement.getTableName(_json);
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if(tableName == null) {
+			return -1;
+		}
+		
 		List<Object> colNames = null;
 		List<List<Object>> records = null;
 		
@@ -307,10 +362,13 @@ public class AppDao implements IAppDao {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		if(colNames == null || records == null) {
+			return -1;
+		}
 		
 		SqlStatement sqlStatement = null;
 		sqlStatement = new SqlStatement.Builder()
-				.insert(TABLENAME)
+				.insert(tableName)
 				.records(colNames, records)
 				.build();
 
@@ -319,18 +377,69 @@ public class AppDao implements IAppDao {
 			return -1;
 		}
 		
-		int result = 0;
-		result = mapper.insertMultipleItems(sqlStatement);
+		int resultCount = 0;
+		try {
+			resultCount = mapper.insertMultipleItems(sqlStatement);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		return result;
+		logger.info("{} items are inserted",resultCount);
+		return resultCount;
 	}
 	
-	public int updateRecord(String _json) {
+	public int updateRecord(String _jsonSetObject) {
 		if(!isInitialized()) {
 			initialize();
 		}
+		
+		String tableName = null;;
+		try {
+			tableName = SqlStatement.getTableName(_jsonSetObject);
+		} catch (JSONException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		if(tableName == null) {
+			return -1;
+		}
+		
+		Map<String,Object> colVariables = null;
+		try {
+			colVariables =
+				SqlStatement.getColVariables(_jsonSetObject);
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		if(colVariables == null) {
+			return -1;
+		}
+		
+		SqlStatement sqlStatement = null;
+		sqlStatement = new SqlStatement.Builder()
+			.update(tableName)
+//			.set(CSTR1, "xxx")
+			.set(colVariables)
+			.where(CNUMBER, OPERATOR.GT, 0)
+			.build();
 
-		return 0;
+		assert(sqlStatement != null);
+		if(sqlStatement == null) {
+			return -1;
+		}
+		
+		int resultCount = 0;
+		try {
+			resultCount = mapper.update(sqlStatement);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		logger.info("{} items are updated",resultCount);
+		return resultCount;
 	}
 	
 	public int deleteRecord() {
@@ -341,12 +450,7 @@ public class AppDao implements IAppDao {
 		SqlStatement sqlStatement = null;
 		sqlStatement = new SqlStatement.Builder()
 			.delete(TABLENAME)
-			.where(CSTR1, SqlStatement.OPERATOR.GT, 0)
-//			.where(CSTR1, SqlStatement.OPERATOR.EQ, SqlStatement.toVV("%"))
-//					.delete(_tablename)
-//					.where(_leftOperand, 
-//							SqlStatement.getOperator(_operator), 
-//							SqlStatement.toVV(_rightOperand))
+			.where(CNUMBER, SqlStatement.OPERATOR.GE, 0)
 			.build();
 
 		assert(sqlStatement != null);
@@ -354,9 +458,15 @@ public class AppDao implements IAppDao {
 			return -1;
 		}
 		
-		int result = 0;
-		result = mapper.delete(sqlStatement);
+		int resultCount = 0;
+		try {
+			return resultCount = mapper.delete(sqlStatement);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		return result;
+		logger.info("{} items are deleted",resultCount);
+		return resultCount;
 	}
 }
