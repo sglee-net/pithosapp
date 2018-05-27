@@ -105,15 +105,12 @@ public class AppController {
     
     @RequestMapping(
     		value = "/record", 
-    		method = RequestMethod.DELETE)
+    		method = RequestMethod.DELETE,
+    		consumes = {"application/json"})
     @ResponseBody
-    public String deleteRecord() {
-//    		@RequestParam("tableName") String _tablename//,
-//    		@RequestParam("leftOperand") String _leftOperand,
-//    		@RequestParam("operand") String _operand,
-//    		@RequestParam("rightOperand") String _rightOperand
-//    		) {
-    	int count = service.deleteRecord();//_tablename);//,_leftOperand, _operand, _rightOperand);
+    public String deleteRecord(
+    		@RequestBody String _json) {
+    	int count = service.deleteRecord(_json);
         return new String("delete, " + Integer.toString(count));
     }
 }

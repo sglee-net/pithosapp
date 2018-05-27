@@ -442,16 +442,40 @@ public class AppDao implements IAppDao {
 		return resultCount;
 	}
 	
-	public int deleteRecord() {
+	public int deleteRecord(String _jsonSetObject) {
 		if(!isInitialized()) {
 			initialize();
 		}
 		
+		String tableName = null;;
+		try {
+			tableName = SqlStatement.getTableName(_jsonSetObject);
+		} catch (JSONException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		if(tableName == null) {
+			return -1;
+		}
+		
+		String whereClause = null;
+		try {
+			whereClause = SqlStatement.getWhereClause(_jsonSetObject);
+		} catch (JSONException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		if(whereClause == null) {
+			return -1;
+		}
+		
 		SqlStatement sqlStatement = null;
 		sqlStatement = new SqlStatement.Builder()
-			.delete(TABLENAME)
+//			.delete(TABLENAME)
 //			.where(CNUMBER, SqlStatement.OPERATOR.GE, 0)
-			.where("C3 >= 0")
+//			.where("C3 >= 0")
+			.delete(tableName)
+			.where(whereClause)
 			.build();
 
 		assert(sqlStatement != null);

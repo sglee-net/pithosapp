@@ -42,12 +42,8 @@ public class AppService {
 		return dao.updateRecord(_json);
 	}
 	
-	public int deleteRecord() {
-//			String _tablename) {//, 
-//			String _leftOperand,
-//			String _operator,
-//			String _rightOperand) {
-		return dao.deleteRecord(); //_tablename);//, _leftOperand, _operator, _rightOperand);
+	public int deleteRecord(String _json) {
+		return dao.deleteRecord(_json);
 	}
 	
 }
