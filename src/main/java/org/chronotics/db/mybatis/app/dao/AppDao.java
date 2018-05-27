@@ -450,7 +450,8 @@ public class AppDao implements IAppDao {
 		SqlStatement sqlStatement = null;
 		sqlStatement = new SqlStatement.Builder()
 			.delete(TABLENAME)
-			.where(CNUMBER, SqlStatement.OPERATOR.GE, 0)
+//			.where(CNUMBER, SqlStatement.OPERATOR.GE, 0)
+			.where("C3 >= 0")
 			.build();
 
 		assert(sqlStatement != null);
