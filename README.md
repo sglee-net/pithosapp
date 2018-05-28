@@ -23,16 +23,15 @@ sqlStatement = new SqlStatement.Builder()
 #### Payload for REST API
 Payload can be used for POST, PUT, DELETE and the format of it is Json.
 * Keywords
-	```
-	tableName
-	resultSet
-	colNames
-	colValues
-	colVariables
-	records
-	whereClause
-	statement
-	```
+	* tableName
+	* resultSet
+	* colNames
+	* colValues
+	* colVariables
+	* records
+	* whereClause
+	* statement
+
 #### Example of REST API
 * POST 
 	* API: insert (one record)
