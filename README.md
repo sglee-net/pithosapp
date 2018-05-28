@@ -1,6 +1,16 @@
-# pithosapp
-
-
+#### Payload for REST API
+Payload can be used for POST, PUT, DELETE and the format of it is Json.
+* Keywords
+	```
+	tableName
+	resultSet
+	colNames
+	colValues
+	colVariables
+	records
+	whereClause
+	statement
+	```
 #### Example of REST API
 * GET
 	* API: selectCustom
