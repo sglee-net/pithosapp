@@ -485,7 +485,7 @@ public class AppDao implements IAppDao {
 		
 		int resultCount = 0;
 		try {
-			return resultCount = mapper.delete(sqlStatement);
+			resultCount = mapper.delete(sqlStatement);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
