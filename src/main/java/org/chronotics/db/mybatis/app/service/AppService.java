@@ -1,11 +1,8 @@
 package org.chronotics.db.mybatis.app.service;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.chronotics.db.mybatis.app.dao.AppDao;
-import org.chronotics.db.mybatis.app.dao.IAppDao;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
@@ -15,15 +12,12 @@ public class AppService {
 	@Resource(name = "appDao")
 	AppDao dao;
 	
-	public List<Float> selectNumberByName(String _name) {
-
-		List<Float> numberList = null;
-		try {
-			numberList = dao.getNumbers(_name);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return numberList;
+	public JSONObject selectCustom(
+			String _tableName,
+			String _c1,
+			String _c2,
+			String _c3) {
+		return dao.selectCustom(_tableName, _c1, _c2, _c3);
 	}
 	
 	public JSONObject selectAllRecords(String _tableName) {

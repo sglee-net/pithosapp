@@ -1,7 +1,11 @@
 package org.chronotics.db.mybatis.app.dao;
 
-import java.util.List;
+import org.json.JSONObject;
 
 public interface IAppDao {
-	List<Float> getNumbers(String name) ;
+	JSONObject selectCustom(
+			String _tableName,
+			String _c1,
+			String _c2,
+			String _c3);
 }

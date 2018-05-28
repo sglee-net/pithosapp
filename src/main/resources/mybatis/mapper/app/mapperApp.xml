@@ -9,49 +9,16 @@
 	Hashtags sign means a prepared statement variables, while dollar sign means a simple string replace.
 	Simply, pair or sigle value
  -->  
- <select id="selectOne" parameterType="map" resultType="map">
+ <select id="selectCustom" parameterType="map" resultType="map">
     SELECT * 
-    FROM ${table}
+    FROM ${tableName}
     WHERE
-    name = #{name}
-  </select>
-  
-   <select id="selectList" parameterType="map" resultType="map">
-    SELECT * 
-    FROM ${table}
-    WHERE 
-    name = #{name}
-<!--     and name = #{name} -->
-  </select>
-  
-  <insert id="insert" parameterType="map">
-    INSERT 
-    INTO ${table}
-    (
-    name,
-    email,
-    info
+    c1 = ${c1}
+    AND (
+    c2 = ${c2}
+    OR
+    c3 = ${c3}
     )
-    VALUES
-    (
-    #{name},
-    #{email},
-    #{info}
-    )
-  </insert>
-  
-  <update id="update" parameterType="map">
-    UPDATE 
-    ${table}
-    SET INFO = 'changed info'
-    WHERE 
-    name = #{name}
-  </update>
-  
-  <delete id="delete" parameterType="map">
-	DELETE from ${table}
-	WHERE 
-	name = #{name}
-  </delete>
+  </select>
   
 </mapper>

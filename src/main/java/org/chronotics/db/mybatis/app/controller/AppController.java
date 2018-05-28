@@ -40,21 +40,22 @@ public class AppController {
     }
 	
     @RequestMapping(
-    		value = "/name", 
+    		value = "/selectCustom", 
     		method = RequestMethod.GET)
     @ResponseBody
     public String daoExample(
-    		@RequestParam("str") String _name) {
-    	logger.info(_name);
-    	List<Float> numberList= service.selectNumberByName(_name);
-    	String strResult="";
-    	for(int i=0; i<numberList.size(); i++) {
-    		if(i!=0 || i!=numberList.size()-1) {
-    			strResult += ", ";
-    		}
-    		strResult += Float.toString(numberList.get(i));
+    		@RequestParam("tableName") String _tableName,
+    		@RequestParam("c1") String _c1,
+    		@RequestParam("c2") String _c2,
+    		@RequestParam("c3") String _c3) {
+    	logger.info(_tableName);
+    	JSONObject jsonObject = 
+    			service.selectCustom(_tableName, _c1, _c2, _c3);
+    	if(jsonObject != null) {
+    		return jsonObject.toString();
+    	} else {
+    		return "no records";
     	}
-    	return new String("select return size()" + Integer.toString(numberList.size()) + ", " + strResult);
     }
     
     @RequestMapping(

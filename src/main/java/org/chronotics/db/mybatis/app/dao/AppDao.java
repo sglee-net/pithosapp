@@ -12,6 +12,7 @@ import org.chronotics.db.mybatis.MapperMySql;
 import org.chronotics.db.mybatis.SqlStatement;
 import org.chronotics.db.mybatis.SqlStatement.KEYWORD;
 import org.chronotics.db.mybatis.SqlStatement.OPERATOR;
+import org.chronotics.db.mybatis.app.mapper.IAppMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -205,44 +206,65 @@ public class AppDao implements IAppDao {
 	}
 	
 	@Override
-	public List<Float> getNumbers(String name) {
+	public JSONObject selectCustom(
+			String _tableName,
+			String _c1,
+			String _c2,
+			String _c3) {
 		if(!isInitialized()) {
 			initialize();
 		}
 		
-		List<Float> rt = new ArrayList<Float>();
+		Map<Object, Object> mapperVariable = new LinkedHashMap<Object, Object>();
+		mapperVariable.put("tableName",_tableName);
+		mapperVariable.put("c1", _c1);
+		mapperVariable.put("c2", _c2);
+		mapperVariable.put("c3", Integer.parseInt(_c3));
 		
-		SqlStatement sqlStatement = 
-				new SqlStatement.Builder()
-				.select("*")
-				.from("user")
-				.build();
-
-		List<Map<String, Object>> result = null;
-		try {
-			result = mapper.selectList(sqlStatement);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		List<Map<String, Object>> resultSet =
+				sqlSession.selectList(IAppMapper.className+"selectCustom",mapperVariable);
+		logger.info("{} items are selected",resultSet.size());
+		
+		JSONObject jsonObject = null;
+		if(resultSet != null) {
+			jsonObject = SqlStatement.getJSonObject(resultSet, 0, resultSet.size());
 		}
+		return jsonObject;
 		
-//		Map<Object, Object> parameter = new LinkedHashMap<Object, Object>();
-//		parameter.put("table", "user");
-//		parameter.put("name", name);
+//		List<Float> rt = new ArrayList<Float>();
 //		
-//		List<Map<String, Object>> result =
-//				sqlSession.selectOne(IAppMapper.className+"selectOne",parameter);
+//		SqlStatement sqlStatement = 
+//				new SqlStatement.Builder()
+//				.select("*")
+//				.from("user")
+//				.build();
 //
-		if(result==null || result.size()==0) {
-			return rt;
-		}
-		for(Map<String,Object> entry : result) {
-			Object obj = entry.get("number");
-			if(obj != null) {
-				rt.add((float)obj);
-			}
-		}
-		return rt;
+//		List<Map<String, Object>> result = null;
+//		try {
+//			result = mapper.selectList(sqlStatement);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+////		Map<Object, Object> parameter = new LinkedHashMap<Object, Object>();
+////		parameter.put("table", "user");
+////		parameter.put("name", name);
+////		
+////		List<Map<String, Object>> result =
+////				sqlSession.selectOne(IAppMapper.className+"selectOne",parameter);
+////
+//		if(result==null || result.size()==0) {
+//			return rt;
+//		}
+//		for(Map<String,Object> entry : result) {
+//			Object obj = entry.get("number");
+//			if(obj != null) {
+//				rt.add((float)obj);
+//			}
+//		}
+//		return rt;
+		
 	}
 	
 	public JSONObject selectAllRecords(String _tableName) {
