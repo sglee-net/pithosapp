@@ -4,8 +4,8 @@
 #### Example of REST API
 
  * GET
-  ** API: selectCustom
-  ** Http message example
+  - API: selectCustom
+  - Http message example
   ```
   http://localhost:8080/selectCustom/?tableName=table1&c1=0&c2=0&c3=1
   ```
