@@ -59,7 +59,7 @@ public class AppController {
     }
     
     @RequestMapping(
-    		value = "/record", 
+    		value = "/selectAll", 
     		method = RequestMethod.GET)
     @ResponseBody
     public String readRecord(
@@ -95,7 +95,7 @@ public class AppController {
     }
     
     @RequestMapping(
-    		value = "/record", 
+    		value = "/records", 
     		method = RequestMethod.PUT)
     @ResponseBody
     public String updateRecord(
@@ -105,7 +105,7 @@ public class AppController {
     }
     
     @RequestMapping(
-    		value = "/record", 
+    		value = "/records", 
     		method = RequestMethod.DELETE,
     		consumes = {"application/json"})
     @ResponseBody
