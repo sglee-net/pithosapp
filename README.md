@@ -2,28 +2,27 @@
 
 
 #### Example of REST API
-
 * GET
- - API: selectCustom
- - Http message example
-  ```
-  http://localhost:8080/selectCustom/?tableName=table1&c1=0&c2=0&c3=1
-  ```
+	* API: selectCustom
+ 	* Http message example
+	```
+	http://localhost:8080/selectCustom/?tableName=table1&c1=0&c2=0&c3=1
+	```
 * GET
- ** API: selectAll
- ** Http message example
- ```
- http://localhost:8080/selectAll?tableName=table1
- ```
+	** API: selectAll
+	** Http message example
+	```
+	http://localhost:8080/selectAll?tableName=table1
+	```
 * POST 
- ** API: insert (one record)
- ** Http message example
- ```
- http://localhost:8080/record
- ```
- ** Payload
- ```
- {
+	** API: insert (one record)
+	** Http message example
+	```
+	http://localhost:8080/record
+	```
+	** Payload
+	```
+	{
 	"tableName" : "table1",
 	"colVariables": [
 			{"c1" : "xxx"},
@@ -40,17 +39,17 @@
 		    ["1", "1", 1],
 		    ["2", "2", 2]
 	    ]
-}
- ```
+	}
+	```
 * POST
- ** API: insert (multiple records)
- ** Http message example
- ```
- http://localhost:8080/records
- ```
- ** Payload
- ```
- {
+	** API: insert (multiple records)
+	** Http message example
+	```
+	http://localhost:8080/records
+	```
+	** Payload
+	```
+	{
 	"tableName" : "table1",
 	"colVariables": [
 			{"c1" : "xxx"},
@@ -67,17 +66,17 @@
 		    ["1", "1", 1],
 		    ["2", "2", 2]
 	    ]
-}
- ```
+	}
+	```
 * PUT
- ** API: update
- ** Http message example
- ```
- http://localhost:8080/records
- ```
- ** Payload
- ```
- {
+	** API: update
+	** Http message example
+	```
+	http://localhost:8080/records
+	```
+	** Payload
+	```
+	{
 	"tableName" : "table1",
 	"colVariables": [
 			{"c1" : "xxx"},
@@ -94,18 +93,18 @@
 		    ["1", "1", 1],
 		    ["2", "2", 2]
 	    ]
-}
- ```
+		}
+		```
 * DELETE
- ** API: delete
- ** Http message example
- ```
- http://localhost:8080/records
- ```
- ** Payload
- ```
- {
+	** API: delete
+	** Http message example
+	```
+	http://localhost:8080/records
+	```
+	** Payload
+	```
+	{
 	"tableName" : "table1",
 	"whereClause" : "c3 >= 0"
- }
- ```
+	}
+	```
