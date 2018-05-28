@@ -6,13 +6,12 @@ There are two ways when you use Pithos. One is the general method based on Mybat
 http://www.mybatis.org/mybatis-3/sqlmap-xml.html
 #### Makeup of dynamic Sql statement by using build pattern
 * Supported API throughout SqlStatement.Builder
-```
-insert, colValue, colValues, records
-select
-update, set
-delete
-where, whereNot, and, andNot, or, orNot
-```
+	* insert, colValue, colValues, records
+	* select
+	* update, set
+	* delete
+	* where, whereNot, and, andNot, or, orNot
+
 * Example
 ```
 SqlStatement sqlStatement = null;
