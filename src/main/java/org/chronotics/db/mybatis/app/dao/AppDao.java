@@ -104,7 +104,6 @@ public class AppDao implements IAppDao {
 	}
 	
 	private void createTables() {
-		
 		{
 			String statement=
 			"DROP TABLE IF EXISTS " + TABLENAME;
@@ -230,41 +229,6 @@ public class AppDao implements IAppDao {
 			jsonObject = SqlStatement.getJSonObject(resultSet, 0, resultSet.size());
 		}
 		return jsonObject;
-		
-//		List<Float> rt = new ArrayList<Float>();
-//		
-//		SqlStatement sqlStatement = 
-//				new SqlStatement.Builder()
-//				.select("*")
-//				.from("user")
-//				.build();
-//
-//		List<Map<String, Object>> result = null;
-//		try {
-//			result = mapper.selectList(sqlStatement);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-////		Map<Object, Object> parameter = new LinkedHashMap<Object, Object>();
-////		parameter.put("table", "user");
-////		parameter.put("name", name);
-////		
-////		List<Map<String, Object>> result =
-////				sqlSession.selectOne(IAppMapper.className+"selectOne",parameter);
-////
-//		if(result==null || result.size()==0) {
-//			return rt;
-//		}
-//		for(Map<String,Object> entry : result) {
-//			Object obj = entry.get("number");
-//			if(obj != null) {
-//				rt.add((float)obj);
-//			}
-//		}
-//		return rt;
-		
 	}
 	
 	public JSONObject selectAllRecords(String _tableName) {
