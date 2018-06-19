@@ -16,7 +16,7 @@
 		http://www.springframework.org/schema/util 
         http://www.springframework.org/schema/util/spring-util.xsd">
 	
-  	<bean id="appDao" class="org.chronotics.db.mybatis.app.dao.AppDao">
+   	<bean id="appDao" class="org.chronotics.db.mybatis.app.dao.AppDao">
 		<property name="sqlSession" ref="sqlSessionSimpleMySql" />
 	</bean>
 
