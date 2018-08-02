@@ -1,3 +1,5 @@
+This project has been moved to https://github.com/chronotics
+
 ## Overview
 This repositoy is an example to utilize Pithos project.
 There are two ways when you use Pithos. One is the general method based on Mybatis, and the other is to make dynamic sql directly such as Mybatis Dynamic SQL.
