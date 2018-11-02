@@ -1,5 +1,3 @@
-This project has been moved to https://github.com/chronotics
-
 ## Overview
 This repositoy is an example to utilize Pithos project.
 There are two ways when you use Pithos. One is the general method based on Mybatis, and the other is to make dynamic sql directly such as Mybatis Dynamic SQL.
@@ -59,7 +57,8 @@ Payload can be used for POST, PUT, DELETE and the format of it is Json.
 		    ["0", "0", 0],
 		    ["1", "1", 1],
 		    ["2", "2", 2]
-	    ]
+	    ],
+	  "whereClause" : "c1=0 OR c1=1"
 	}
 	```
 * POST
@@ -86,7 +85,36 @@ Payload can be used for POST, PUT, DELETE and the format of it is Json.
 		    ["0", "0", 0],
 		    ["1", "1", 1],
 		    ["2", "2", 2]
-	    ]
+	    ],
+	  "whereClause" : "c1=0 OR c1=1"
+	}
+	```
+* POST (Special case for "SELECT" with SQL statement)
+	* API: selectAll
+	* Http message example
+	```
+	http://localhost:8080/select
+	```
+	* Payload : The below code will works as "SELECT c1,c2,c3 from table1 WHERE c1=0 OR c1=1"
+	```
+	{
+	"tableName" : "table1",
+	"colVariables": [
+			{"c1" : "xxx"},
+		    {"c2" : "yyy"}
+	    ],
+	  "colNames" : [
+		  	"c1", "c2", "c3"
+	    ],
+	  "colValues" : [
+		    "0", "0", 0
+	    ],
+	  "records" : [
+		    ["0", "0", 0],
+		    ["1", "1", 1],
+		    ["2", "2", 2]
+	    ],
+	  "whereClause" : "c1=0 OR c1=1"
 	}
 	```
 * GET
@@ -125,7 +153,8 @@ Payload can be used for POST, PUT, DELETE and the format of it is Json.
 		    ["0", "0", 0],
 		    ["1", "1", 1],
 		    ["2", "2", 2]
-	    ]
+	    ],
+	  "whereClause" : "c1=0 OR c1=1"
 		}
 		```
 * DELETE
